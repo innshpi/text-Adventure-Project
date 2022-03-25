@@ -8,7 +8,6 @@
 import java.util.Scanner;                    
 public class textAdventure
 {
-    // instance variables - replace the example below with your own
     final int INVALIDDIRECTION = -1;
     int[] goNorth = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION};
     int[] goSouth = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION};
@@ -22,7 +21,6 @@ public class textAdventure
      */
     public textAdventure()
     {
-        // initialise instance variables
         
     }
 }
