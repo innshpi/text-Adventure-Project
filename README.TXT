@@ -10,5 +10,3 @@ VERSION or DATE:1/04/22
 HOW TO START THIS PROJECT: Create Rooms
 AUTHORS: Piper Inns Hall
 USER INSTRUCTIONS:
-
-"I was here" 
