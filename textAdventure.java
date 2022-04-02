@@ -7,6 +7,10 @@
 import java.util.Scanner;                    
 public class textAdventure
 {
+    Scanner kb = new Scanner(System.in); 
+    
+    int currentRoom = 0;
+    int nextRoom=-1;
     boolean stillPlaying;
     
     final int INVALIDDIRECTION = -1;
@@ -33,26 +37,34 @@ public class textAdventure
      */
     public textAdventure()
     {
-        int currentRoom = 0;
-        int nextRoom=-1;
-        Scanner kb = new Scanner(System.in); 
         stillPlaying = true;
         System.out.println(roomDescript[currentRoom]);
         while (stillPlaying){
-            String cmd = kb.nextLine();
+            String cmd0 = kb.nextLine();
             //cmd.toLowerCase();
-            if(cmd.equals("north")) nextRoom=goNorth[currentRoom];
-            if(cmd.equals("south")) nextRoom=goSouth[currentRoom];
-            if(cmd.equals("east")) nextRoom=goEast[currentRoom];
-            if(cmd.equals("west")) nextRoom=goWest[currentRoom];
-            if(cmd.equals("up")) nextRoom=goUp[currentRoom];
-            if(cmd.equals("down")) nextRoom=goDown[currentRoom];
+            if(cmd0.equals("north"))nextRoom=goNorth[currentRoom];
+            if(cmd0.equals("south"))nextRoom=goSouth[currentRoom];
+            if(cmd0.equals("east"))nextRoom=goEast[currentRoom];
+            if(cmd0.equals("west"))nextRoom=goWest[currentRoom];
+            if(cmd0.equals("up"))nextRoom=goUp[currentRoom];
+            if(cmd0.equals("down"))nextRoom=goDown[currentRoom];
             if(nextRoom == INVALIDDIRECTION) System.out.println("this is an invalid command :("); 
             else{ 
-                //System.out.println("u\000c");
+                System.out.print('\u000C');
                 currentRoom = nextRoom;
                 System.out.println(roomDescript[currentRoom]);
+                searchFunction();
             }
         }   
+    }
+    public void searchFunction(){
+        String cmd1 = kb.nextLine();
+        if (cmd1.equals("search")){
+            if(currentRoom == 1);
+            else if(currentRoom == 2);
+            else if(currentRoom == 3);
+            else if(currentRoom == 4);
+            else System.out.println("found nothing");
+        }
     }
 }
