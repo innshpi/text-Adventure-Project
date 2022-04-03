@@ -2,7 +2,13 @@
 comment0.target=textAdventure
 comment1.params=
 comment1.target=textAdventure()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ textAdventure\r\n
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ textAdventure\n
 comment2.params=
-comment2.target=void\ backpack()
-numComments=3
+comment2.target=void\ spiderAttack()
+comment3.params=
+comment3.target=void\ backpack()
+comment4.params=
+comment4.target=void\ doableActions()
+comment5.params=
+comment5.target=void\ death()
+numComments=6
