@@ -4,5 +4,5 @@ comment1.params=
 comment1.target=textAdventure()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ textAdventure\r\n
 comment2.params=
-comment2.target=void\ searchFunction()
+comment2.target=void\ backpack()
 numComments=3
