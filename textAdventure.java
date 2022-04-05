@@ -36,28 +36,18 @@ public class textAdventure
     /*room 0(starting descrpition)*/"grass patch, down steep hill is sand flats.\nall you have is the clothes on your back and a brown backpack."};
     
     private String[] nextRoomDescript = {
-    /*room 0*/"Almost there",
-    /*room 1*/"Sand dunes",
-    /*room 2*/"Scary cave",
-    /*room 3*/"Bright cave",
-    /*room 4*/"Tide pool",
-    /*room 5*/"Beach",
-    /*room 6*/"Under water cave",
-    /*room 7*/"Ocean",
-    /*room 8*/"Stream",
-    /*room 9*/"Final room",
-    /*room 0(starting descrpition)*/"grass patch, down steep hill is sand flats.\nall you have is the clothes on your back and a brown backpack."};
+    /*room 0*/"toward the unknown",
+    /*room 1*/"to Sand dunes (explored previously)",
+    /*room 2*/"to Dark cave (explored previously)",
+    /*room 3*/"to Bright cave (explored previously)",
+    /*room 4*/"to Tide pool (explored previously)",
+    /*room 5*/"to Beach (explored previously)",
+    /*room 6*/"to Under water cave (explored previously)",
+    /*room 7*/"to Ocean (explored previously)",
+    /*room 8*/"to Stream (explored previously)",};
     
     //Rooms you have been to
-    boolean beenRoom0 = true;
-    boolean beenRoom1 = false;
-    boolean beenRoom2 = false;
-    boolean beenRoom3 = false;
-    boolean beenRoom4 = false;
-    boolean beenRoom5 = false;
-    boolean beenRoom6 = false;
-    boolean beenRoom7 = false;
-    boolean beenRoom8 = false;
+    boolean[] beenRoom = {false,false,false,false,false,false,false,false};
     
     //inventory
     final int YSRCH = 1;
@@ -75,7 +65,6 @@ public class textAdventure
     {
         System.out.println(roomDescript[10]);
         doableActions();
-        System.out.println(nextRoomDescript[goWest[currentRoom]] + "this is the room in the north direction");
         while (stillPlaying){
             String cmd0 = kb.nextLine();
             //cmd0.toLowerCase();
@@ -93,6 +82,7 @@ public class textAdventure
             }
             else if(nextRoom>=0){
                 System.out.print('\u000C');
+                beenRoom[currentRoom] = true;
                 currentRoom = nextRoom;
                 System.out.println(roomDescript[currentRoom]);
                 doableActions();
@@ -172,7 +162,7 @@ public class textAdventure
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }
-         else if(currentRoom == 7){
+        else if(currentRoom == 7){
             System.out.println("\nYou swim out to sea from the shallows, but you get caught in a rip.");
             canSearch[currentRoom] = NSRCH;
             ripCaught();
@@ -184,15 +174,21 @@ public class textAdventure
         }
     }
     public void doableActions(){
-        System.out.println("\nActions you can perform right now:\n");
-        if(goNorth[currentRoom]>=0)System.out.print("North");
-        if(goSouth[currentRoom]>=0)System.out.print("South");
-        if(goEast[currentRoom]>=0)System.out.print("East");
-        if(goWest[currentRoom]>=0)System.out.print("West");
-        if(goUp[currentRoom]>=0)System.out.print("Up");
-        if(goDown[currentRoom]>=0)System.out.print("Down");
-        if(canSearch[currentRoom] == YSRCH)System.out.println("Search");
-        if(canBackpack)System.out.println("Backpack");
+        System.out.println("\nActions you can perform right now:");
+        if(goNorth[currentRoom]>=0)System.out.print("\nNorth ");
+        if(goNorth[currentRoom]>=0 && beenRoom[goNorth[currentRoom]])System.out.print(nextRoomDescript[goNorth[currentRoom]]);
+        if(goSouth[currentRoom]>=0)System.out.print("\nSouth ");
+        if(goSouth[currentRoom]>=0 && beenRoom[goSouth[currentRoom]])System.out.print(nextRoomDescript[goSouth[currentRoom]]);
+        if(goEast[currentRoom]>=0)System.out.print("\nEast ");
+        if(goEast[currentRoom]>=0 && beenRoom[goEast[currentRoom]])System.out.print(nextRoomDescript[goEast[currentRoom]]);
+        if(goWest[currentRoom]>=0)System.out.print("\nWest ");
+        if(goWest[currentRoom]>=0 && beenRoom[goWest[currentRoom]])System.out.print(nextRoomDescript[goWest[currentRoom]]);
+        if(goUp[currentRoom]>=0)System.out.print("\nUp ");
+        if(goUp[currentRoom]>=0 && beenRoom[goUp[currentRoom]])System.out.print(nextRoomDescript[goUp[currentRoom]]);
+        if(goDown[currentRoom]>=0)System.out.print("\nDown ");
+        if(goDown[currentRoom]>=0 && beenRoom[goDown[currentRoom]])System.out.print(nextRoomDescript[goDown[currentRoom]]);
+        if(canSearch[currentRoom] == YSRCH)System.out.println("\nSearch");
+        if(canBackpack)System.out.println("\nBackpack");
     }
     public void spiderAttack(){
         if(haveSword){
@@ -233,15 +229,7 @@ public class textAdventure
             goNorth[0]=INVALIDDIRECTION;
             
             //Reseting rooms you have been to
-            boolean beenRoom0 = true;
-            boolean beenRoom1 = false;
-            boolean beenRoom2 = false;
-            boolean beenRoom3 = false;
-            boolean beenRoom4 = false;
-            boolean beenRoom5 = false;
-            boolean beenRoom6 = false;
-            boolean beenRoom7 = false;
-            boolean beenRoom8 = false;
+            int[] beenRoom = {-1,-1,-1,-1,-1,-1,-1,-1};
             
             //Reseting inventory
             int[] canSearch = {NSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH};
