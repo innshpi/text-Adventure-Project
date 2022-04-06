@@ -23,8 +23,8 @@ public class textAdventure
     int[] goDown = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION,/*room 3*/INVALIDDIRECTION,/*room 4*/6,/*room 5*/INVALIDDIRECTION,/*room 6*/INVALIDDIRECTION,/*room 7*/INVALIDDIRECTION,/*room 8*/INVALIDDIRECTION,/*room 9*/INVALIDDIRECTION};
     
     private String[] roomDescript = {
-    /*room 0*/"almost there",
-    /*room 1*/"You are walking across a barren sand flat, with nothing much in sight but\nsand dunes, and the occasional crab. You look east and across the dunes, and you see a small opening in the side of a tall rocky cliff. Interested, you walk towards the cave opening. South towards the right of the cave opening, is a winding dirt path lined with dense trees and shrubs.",
+    /*room 0*/"You wade up the stream, and when you step out you realise you are back at the small feild on the hill. You look down the sheer cliff and see the sand flats, as well as the rope you placed to get down. Somethings different though. In the center of the field is an old door, sitting alone with no building to support it. It has no defining charachteristics except for a fang shaped hole in the center, about as big as your head",
+    /*room 1*/"You are walking across a barren sand flat, with nothing much in sight but\nsand dunes, and the occasional crab. You look east and across the dunes,\nand you see a small opening in the side of a tall rocky cliff. Interested,\nyou walk towards the cave opening. South towards the right of the cave\nopening, is a winding dirt path lined with dense trees and shrubs.",
     /*room 2*/"You descend down into the dark pit below, the only thing keeping you from\nplummeting to the bottom are the rusty steel rungs your hands are clasped to.\nWhen your feet finally meet the hard stone floor, you can see nothing but black.\nAs your eyes slowly adjust to the dark, you realise you’re in a vast, empty cavern.\nYou take in the scene and your eyes follow the impossibly high walls up to the\nceiling, which nests thousands of glowworms. Across the rocky floor there are\npatches of thriving moss and in the distance you hear the faint echoing of dripping\nwater.",
     /*room 3*/"Bright cave",
     /*room 4*/"Tide pool",
@@ -32,11 +32,11 @@ public class textAdventure
     /*room 6*/"Under water cave",
     /*room 7*/"Ocean",
     /*room 8*/"Stream",
-    /*room 9*/"You wade up the stream, and when you step out you realise you are back at the small feild on the hill. You look down the sheer cliff and see the sand flats, as well as the rope you placed to get down. Somethings different though. In the center of the field is an old door, sitting alone with no building to support it. It has no defining charachteristics except for a fang shaped hole in the center, about as big as your head.",
-    /*room 0(starting descrpition)*/"grass patch, down steep hill is sand flats.\nall you have is the clothes on your back and a brown backpack."};
+    /*room 9*/"sus.",
+    /*room 0(starting descrpition)*/"grass patch, down steep hill is sand flats.\nall you have is the clothes on your back and a red backpack."};
     
     private String[] nextRoomDescript = {
-    /*room 0*/"toward the unknown",
+    /*room 0*/"to Grassy hill  (explored previously)",
     /*room 1*/"to Sand dunes (explored previously)",
     /*room 2*/"to Dark cave (explored previously)",
     /*room 3*/"to Bright cave (explored previously)",
@@ -47,12 +47,12 @@ public class textAdventure
     /*room 8*/"to Stream (explored previously)",};
     
     //Rooms you have been to
-    boolean[] beenRoom = {false,false,false,false,false,false,false,false};
+    boolean[] beenRoom = {false,false,false,false,false,false,false,false,false,false};
     
     //inventory
     final int YSRCH = 1;
     final int NSRCH = 0;
-    int[] canSearch = {NSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH};
+    int[] canSearch = {NSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,YSRCH,NSRCH};
     boolean canBackpack = true;
     boolean haveRope = true;
     boolean haveSword = false;
@@ -128,7 +128,6 @@ public class textAdventure
                 System.out.println("\nyou place the fang in the door, and it opens. Everything around you is suddenly engulfed in a bright white light eminating from inside the door");
                 goNorth[0]=9;
                 canBackpack = false;
-                doableActions();
             }
             else System.out.println("\nYou cannot do this right now, or this is an invalid command");
         }
@@ -189,6 +188,7 @@ public class textAdventure
         if(goDown[currentRoom]>=0 && beenRoom[goDown[currentRoom]])System.out.print(nextRoomDescript[goDown[currentRoom]]);
         if(canSearch[currentRoom] == YSRCH)System.out.println("\nSearch");
         if(canBackpack)System.out.println("\nBackpack");
+        if(currentRoom == 9)System.out.println("Nothing because you won!");
     }
     public void spiderAttack(){
         if(haveSword){
