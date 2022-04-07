@@ -24,12 +24,10 @@ public class textAdventure
     int[] goUp = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/1,/*room 3*/INVALIDDIRECTION,/*room 4*/INVALIDDIRECTION,/*room 5*/INVALIDDIRECTION,/*room 6*/4,/*room 7*/INVALIDDIRECTION,/*room 8*/0,/*room 9*/INVALIDDIRECTION};
     int[] goDown = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION,/*room 3*/INVALIDDIRECTION,/*room 4*/6,/*room 5*/INVALIDDIRECTION,/*room 6*/INVALIDDIRECTION,/*room 7*/INVALIDDIRECTION,/*room 8*/INVALIDDIRECTION,/*room 9*/INVALIDDIRECTION};
     
-    File roomDescFile=new File("roomD.txt");
-    Scanner readFile = new Scanner(roomDescFile);
+    final int NUMROOMS = 11;
     
-    final int NUMROOMS = 10;
-    
-    private String[] roomDescript = new String[NUMROOMS];
+    File roomDFile=new File("roomD.txt");
+    String[] roomD = new String[NUMROOMS];
     
     private String[] nextRoomDescript = {
     /*room 0*/"to Grassy hill  (explored previously)",
@@ -40,7 +38,7 @@ public class textAdventure
     /*room 5*/"to Beach (explored previously)",
     /*room 6*/"to Under water cave (explored previously)",
     /*room 7*/"to Ocean (explored previously)",
-    /*room 8*/"to Stream (explored previously)",};
+    /*room 8*/"to Stream (explored previously)"};
     
     //Rooms you have been to
     boolean[] beenRoom = {false,false,false,false,false,false,false,false,false,false};
@@ -59,7 +57,8 @@ public class textAdventure
      */
     public textAdventure()
     {
-        System.out.println(roomDescript[10]);
+        fileRead();
+        System.out.println(roomD[10]);
         doableActions();
         while (stillPlaying){
             String cmd0 = kb.nextLine();
@@ -80,7 +79,7 @@ public class textAdventure
                 System.out.print('\u000C');
                 beenRoom[currentRoom] = true;
                 currentRoom = nextRoom;
-                System.out.println(roomDescript[currentRoom]);
+                System.out.println(roomD[currentRoom]);
                 doableActions();
                 nextRoom=-1;
             }
@@ -89,6 +88,19 @@ public class textAdventure
                 doableActions();
             }
         }
+    }
+    public void fileRead(){
+        try {
+            Scanner readFile = new Scanner(roomDFile);
+            for(int i=0;i<NUMROOMS;i++)roomD[i] = "";
+            for(int i=0;i<NUMROOMS;i++){
+                String lineRead = readFile.nextLine();
+                while(!lineRead.equals(";")){
+                    roomD[i]+=lineRead+"\n";
+                    lineRead = readFile.nextLine();
+                }
+            }
+        }catch (IOException e){}
     }
     public void backpack(){
         System.out.println ("\nyou take your trusty backpack off of your back and look at the contents.\n\ninside is:");
@@ -235,7 +247,7 @@ public class textAdventure
             haveLifeJacket = false;
             haveFangKey = false;
             
-            System.out.println(roomDescript[currentRoom]);
+            System.out.println(roomD[currentRoom]);
             doableActions();
         }
     }
