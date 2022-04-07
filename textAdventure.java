@@ -4,7 +4,9 @@
  * @author (Piper Inns Hall)
  * @version (24/03/21)
  */
-import java.util.Scanner;                    
+import java.util.Scanner;  
+import java.io.File;
+import java.io.IOException;                  
 public class textAdventure
 {
     Scanner kb = new Scanner(System.in); 
@@ -22,18 +24,12 @@ public class textAdventure
     int[] goUp = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/1,/*room 3*/INVALIDDIRECTION,/*room 4*/INVALIDDIRECTION,/*room 5*/INVALIDDIRECTION,/*room 6*/4,/*room 7*/INVALIDDIRECTION,/*room 8*/0,/*room 9*/INVALIDDIRECTION};
     int[] goDown = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION,/*room 3*/INVALIDDIRECTION,/*room 4*/6,/*room 5*/INVALIDDIRECTION,/*room 6*/INVALIDDIRECTION,/*room 7*/INVALIDDIRECTION,/*room 8*/INVALIDDIRECTION,/*room 9*/INVALIDDIRECTION};
     
-    private String[] roomDescript = {
-    /*room 0*/"You wade up the stream, and when you step out you realise you are back at the small feild on the hill. You look down the sheer cliff and see the sand flats, as well as the rope you placed to get down. Somethings different though. In the center of the field is an old door, sitting alone with no building to support it. It has no defining charachteristics except for a fang shaped hole in the center, about as big as your head",
-    /*room 1*/"You are walking across a barren sand flat, with nothing much in sight but\nsand dunes, and the occasional crab. You look east and across the dunes,\nand you see a small opening in the side of a tall rocky cliff. Interested,\nyou walk towards the cave opening. South towards the right of the cave\nopening, is a winding dirt path lined with dense trees and shrubs.",
-    /*room 2*/"You descend down into the dark pit below, the only thing keeping you from\nplummeting to the bottom are the rusty steel rungs your hands are clasped to.\nWhen your feet finally meet the hard stone floor, you can see nothing but black.\nAs your eyes slowly adjust to the dark, you realise you’re in a vast, empty cavern.\nYou take in the scene and your eyes follow the impossibly high walls up to the\nceiling, which nests thousands of glowworms. Across the rocky floor there are\npatches of thriving moss and in the distance you hear the faint echoing of dripping\nwater.",
-    /*room 3*/"Bright cave",
-    /*room 4*/"Tide pool",
-    /*room 5*/"Beach",
-    /*room 6*/"Under water cave",
-    /*room 7*/"Ocean",
-    /*room 8*/"Stream",
-    /*room 9*/"sus.",
-    /*room 0(starting descrpition)*/"grass patch, down steep hill is sand flats.\nall you have is the clothes on your back and a red backpack."};
+    File roomDescFile=new File("roomD.txt");
+    Scanner readFile = new Scanner(roomDescFile);
+    
+    final int NUMROOMS = 10;
+    
+    private String[] roomDescript = new String[NUMROOMS];
     
     private String[] nextRoomDescript = {
     /*room 0*/"to Grassy hill  (explored previously)",
