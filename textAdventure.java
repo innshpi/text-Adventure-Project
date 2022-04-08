@@ -2,7 +2,7 @@
  * Write a description of class textAdventure here.
  *
  * @author (Piper Inns Hall)
- * @version (24/03/21)
+ * @version (8/04/22)
  */
 import java.util.Scanner;  
 import java.io.File;
@@ -11,7 +11,7 @@ public class textAdventure
 {
     Scanner kb = new Scanner(System.in); 
     
-    boolean stillPlaying = true;
+    boolean stillPlaying = false;
     
     int currentRoom = 0;
     int nextRoom=-1;
@@ -24,10 +24,13 @@ public class textAdventure
     int[] goUp = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/1,/*room 3*/INVALIDDIRECTION,/*room 4*/INVALIDDIRECTION,/*room 5*/INVALIDDIRECTION,/*room 6*/4,/*room 7*/INVALIDDIRECTION,/*room 8*/0,/*room 9*/INVALIDDIRECTION};
     int[] goDown = {/*room 0*/INVALIDDIRECTION,/*room 1*/INVALIDDIRECTION,/*room 2*/INVALIDDIRECTION,/*room 3*/INVALIDDIRECTION,/*room 4*/6,/*room 5*/INVALIDDIRECTION,/*room 6*/INVALIDDIRECTION,/*room 7*/INVALIDDIRECTION,/*room 8*/INVALIDDIRECTION,/*room 9*/INVALIDDIRECTION};
     
-    final int NUMROOMS = 11;
-    
+    final int NUMROOMS = 12;
     File roomDFile=new File("roomD.txt");
     String[] roomD = new String[NUMROOMS];
+    
+    final int NUMSEARCH = 7;
+    File searchFile=new File("search.txt");
+    String[] search = new String[NUMSEARCH];
     
     private String[] nextRoomDescript = {
     /*room 0*/"to Grassy hill  (explored previously)",
@@ -58,8 +61,14 @@ public class textAdventure
     public textAdventure()
     {
         fileRead();
-        System.out.println(roomD[10]);
-        doableActions();
+        System.out.println(roomD[11]);
+        String cmdn1 = kb.nextLine();
+        if(cmdn1.equals ("start")) stillPlaying = true;
+        if(stillPlaying){
+            System.out.print('\u000C');
+            System.out.println(roomD[10]);
+            doableActions();
+        }
         while (stillPlaying){
             String cmd0 = kb.nextLine();
             //cmd0.toLowerCase();
@@ -97,6 +106,17 @@ public class textAdventure
                 String lineRead = readFile.nextLine();
                 while(!lineRead.equals(";")){
                     roomD[i]+=lineRead+"\n";
+                    lineRead = readFile.nextLine();
+                }
+            }
+        }catch (IOException e){}
+        try {
+            Scanner readFile = new Scanner(searchFile);
+            for(int i=0;i<NUMSEARCH;i++)search[i] = "";
+            for(int i=0;i<NUMSEARCH;i++){
+                String lineRead = readFile.nextLine();
+                while(!lineRead.equals(";")){
+                    search[i]+=lineRead+"\n";
                     lineRead = readFile.nextLine();
                 }
             }
@@ -142,40 +162,40 @@ public class textAdventure
     }
     public void search(){
         if(currentRoom == 1){
-            System.out.println("\nyou rustle around the undergrowth and push away some shrubs,\ndiscovering an ominous trapdoor heading downwards.");
+            System.out.println(search[0]);
             goDown[1]=2;
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }    
         else if(currentRoom == 2){
-            System.out.println("\nyou walk towards the sound of running water, when suddenly you can't move.\nbefore you realise what has happened, a giant spider with fangs that look big enough to tear a deer in half jumps out at you from\nthe darkness.");
+            System.out.println(search[1]);
             canSearch[currentRoom] = NSRCH;
             spiderAttack();
         }
         else if(currentRoom == 3){
-            System.out.println("\nPerched on a particularly sharp stalagmite in the corner of\nthe cave is a lifejacket. It may come in handy so you pick it up.");
+            System.out.println(search[2]);
             haveLifeJacket = true;
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }
         else if(currentRoom == 4){
-            System.out.println("\nYou wade through the glistening pools and in the depths of a large one is a sword buried underneath some sand.");
+            System.out.println(search[3]);
             haveSword = true;
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }
         else if(currentRoom == 5){
-            System.out.println("\nYou climb to the top of the largest rock you can find and stare into the horizon.\nYou truly feel like an adventurer.");
+            System.out.println(search[4]);
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }
         else if(currentRoom == 7){
-            System.out.println("\nYou swim out to sea from the shallows, but you get caught in a rip.");
+            System.out.println(search[5]);
             canSearch[currentRoom] = NSRCH;
             ripCaught();
         }
         else {
-            System.out.println("\nYou found nothing. You feel slightly demoralized for no particular reason");
+            System.out.println(search[6]);
             canSearch[currentRoom] = NSRCH;
             doableActions();
         }
@@ -194,8 +214,8 @@ public class textAdventure
         if(goUp[currentRoom]>=0 && beenRoom[goUp[currentRoom]])System.out.print(nextRoomDescript[goUp[currentRoom]]);
         if(goDown[currentRoom]>=0)System.out.print("\nDown ");
         if(goDown[currentRoom]>=0 && beenRoom[goDown[currentRoom]])System.out.print(nextRoomDescript[goDown[currentRoom]]);
-        if(canSearch[currentRoom] == YSRCH)System.out.println("\nSearch");
-        if(canBackpack)System.out.println("\nBackpack");
+        if(canSearch[currentRoom] == YSRCH)System.out.print("\nSearch");
+        if(canBackpack)System.out.print("\nBackpack\n");
         if(currentRoom == 9)System.out.println("Nothing because you won!");
     }
     public void spiderAttack(){

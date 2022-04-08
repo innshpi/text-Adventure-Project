@@ -4,7 +4,7 @@ cliff and see the sand flats, as well as the rope you placed to
 get down. Somethings different though. In the centre of the field 
 is an old door, sitting alone with no building to support it. It 
 has no defining characteristics except for a fang shaped hole in 
-the centre, about as big as your head
+the centre, about as big as your head.
 ;
 You are walking across a barren sand flat, with nothing much in 
 sight but sand dunes, and the occasional crab. You look east and 
@@ -39,4 +39,13 @@ End
 ;
 grass patch, down steep hill is sand flats.
 all you have is the clothes on your back and a red backpack.
+;
+Welcome to my text adventure game!
+
+In this game, you type commands to do actions like moving around.
+The game will tell you what you can do at every turn, and anything
+that is not a doable action will not do an action. Remember to 
+search rooms for loot, and have fun!
+
+Type "start" to start.
 ;
